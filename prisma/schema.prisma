@@ -1,0 +1,117 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  MANAGER
+  EMPLOYEE
+}
+
+model User {
+  id          String  @id @default(uuid())
+  clerkUserId String? @unique
+  activated   Boolean @default(false)
+  email       String  @unique
+  role        Role
+  firstName   String?
+  lastName    String?
+  imageUrl    String?
+
+  products Product[]
+  orders   Order[]
+}
+
+model Product {
+  id      String  @id @default(uuid())
+  battery String
+  brand   String
+  cpu     String
+  storage String
+  ram     String
+  images  Json
+  screen  String
+  state   String
+  details String
+  isNew   Boolean
+  name    String
+  price   Int
+  isSold  Boolean @default(false)
+
+  creatorId String
+  creator   User   @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+
+  carts Cart[]
+}
+
+enum OrderStatus {
+  SHIPPED
+  CANCELED
+  DELIVERING
+  NOTCONFIRMED
+  CONFIRMED
+}
+
+model Order {
+  id String @id
+
+  details String?
+  name    String
+  email   String
+  phone   String
+  wilaya  String
+  price   Int
+  adress  String?
+  status  OrderStatus @default(NOTCONFIRMED)
+
+  products Product[]
+  timeline Step[]
+
+  creatorId String?
+  creator   User?   @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Step {
+  id String @id @default(uuid())
+
+  title String
+
+  orders Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  id String @id @default(uuid())
+
+  name    String?
+  email   String?
+  phone   String?
+  wilaya  String?
+  adress  String?
+  price   Int?
+  details String?
+
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
