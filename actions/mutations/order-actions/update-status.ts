@@ -14,7 +14,37 @@ export const UpdateOrderStatus = async (
   if (!products) {
     return;
   }
+
   if (currentStatus === "CANCELED") {
+    const result = await Promise.all(
+      products.map(async (product) => {
+        const neededProduct = await db.product.findUnique({
+          where: {
+            id: product.id,
+          },
+        });
+
+        if (neededProduct?.isSold) {
+          return {
+            orders: null,
+            error: "One or more product of the order is already Sold .",
+          };
+        }
+
+        return {
+          orders: "",
+          error: null,
+        };
+      })
+    );
+
+    if (result.some((result) => result.error)) {
+      return {
+        orders: null,
+        error: "One or more product of the order is already Sold .",
+      };
+    }
+
     const res = await db.$transaction(
       products.map((product) =>
         db.product.update({
@@ -58,5 +88,9 @@ export const UpdateOrderStatus = async (
 
   revalidatePath("/dashboard/orders");
 
-  return order;
+  return {
+    order,
+
+    error: null,
+  };
 };

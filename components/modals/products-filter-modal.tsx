@@ -18,14 +18,14 @@ export const ProductsFilterModal = () => {
 
   const isModalOpen = isOpen && type === "productsFilter";
 
-  const { res, searchParams } = data;
+  const { searchParams } = data;
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-white text-black ">
         <div className="relative w-full space-y-10">
           <ClientProductsFilter searchParams={searchParams} />
-          <PriceFilter res={res} />
+          <PriceFilter />
         </div>
       </DialogContent>
     </Dialog>

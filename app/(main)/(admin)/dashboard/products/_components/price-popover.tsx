@@ -5,11 +5,8 @@ import {
 } from "@/components/ui/popover";
 import { ChevronDown } from "lucide-react";
 import PriceFilter from "./price-filter";
-import { getMinMaxPrice } from "@/actions/queries/get-min-max-price";
 
 export async function PricePopover() {
-  const res = await getMinMaxPrice();
-
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -21,7 +18,7 @@ export async function PricePopover() {
         </div>
       </PopoverTrigger>
       <PopoverContent className="w-80">
-        <PriceFilter res={res} />
+        <PriceFilter />
       </PopoverContent>
     </Popover>
   );

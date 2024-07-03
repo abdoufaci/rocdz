@@ -7,6 +7,7 @@ import { OrderDetailsModal } from "@/components/modals/order-details-modal";
 import { ProductDetailsModal } from "@/components/modals/product-details-modal";
 import { ProductsFilterModal } from "@/components/modals/products-filter-modal";
 import { SoldProductModal } from "@/components/modals/sold-product-modal";
+import { ThankyouModal } from "@/components/modals/thankyou-modal";
 import { useEffect, useState } from "react";
 
 export const ModalProvider = () => {
@@ -29,6 +30,7 @@ export const ModalProvider = () => {
       <AddOrderModal />
       <OrderDetailsModal />
       <ProductsFilterModal />
+      <ThankyouModal />
     </div>
   );
 };

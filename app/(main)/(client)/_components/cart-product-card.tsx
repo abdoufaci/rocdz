@@ -38,7 +38,7 @@ function CartProductCard({ product, cartId }: CartProductCardProps) {
 
   return (
     <div className="flex items-center justify-between">
-      <div className="flex items-center gap-4">
+      <div className="flex max-sm:flex-col items-start sm:items-center gap-4">
         <div className="relative w-full max-w-[148px] min-w-[148px] h-[154px]">
           <Image
             alt="laptop"

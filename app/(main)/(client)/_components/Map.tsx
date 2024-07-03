@@ -13,8 +13,8 @@ function Map() {
         allowFullScreen={false}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"></iframe>
-      <div className="space-y-5">
-        <div className="border border-black/25 p-5 space-y-4 w-[357.87px]">
+      <div className="space-y-5 w-full max-w-[357.87px] flex flex-col flex-wrap items-center justify-center">
+        <div className="border border-black/25 p-5 space-y-4 w-full max-w-[357.87px]">
           <div className="flex items-center gap-2 font-semibold text-[#252525]">
             <MapPin className="h-5 w-5" />
             <h1>ADDRESS</h1>
@@ -23,7 +23,7 @@ function Map() {
             Bab Ezzouar enface USTHB
           </h1>
         </div>
-        <div className="border border-black/25 p-5 space-y-4 w-[357.87px]">
+        <div className="border border-black/25 p-5 space-y-4 w-full max-w-[357.87px]">
           <div className="flex items-center gap-2 font-semibold text-[#252525]">
             <Clock className="h-5 w-5" />
             <h1>WORKING DAYS</h1>
@@ -33,7 +33,7 @@ function Map() {
             <h1 className="text-[#787878] text-sm">9h-19h </h1>
           </div>
         </div>
-        <div className="border border-black/25 p-5 space-y-4 w-[357.87px]">
+        <div className="border border-black/25 p-5 space-y-4 w-full max-w-[357.87px]">
           <div className="flex items-center gap-2 font-semibold text-[#252525]">
             <Truck className="h-5 w-5" />
             <h1>DELIVERY</h1>

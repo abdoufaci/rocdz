@@ -32,7 +32,7 @@ function Cart() {
           )}
         </div>
       </PopoverTrigger>
-      <PopoverContent className="space-y-4 mt-3 md:mr-10 w-[451.41px] rounded-none">
+      <PopoverContent className="space-y-4 mt-3 mr-2 md:mr-10 w-full sm:w-[451.41px] rounded-none">
         <h1 className="text-xl font-semibold text-[#1D1D1F]">
           Your Shopping Cart
         </h1>

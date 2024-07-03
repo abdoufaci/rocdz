@@ -1,5 +1,6 @@
 "use client";
 
+import { getMinMaxPrice } from "@/actions/queries/get-min-max-price";
 import { Slider } from "@/components/ui/slider";
 import { useFilterModal } from "@/hooks/use-filter-modal-store";
 import { Prisma } from "@prisma/client";
@@ -7,19 +8,52 @@ import { useDebounce } from "@uidotdev/usehooks";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-interface PriceFilterProps {
-  res?: Prisma.GetProductAggregateType<{
-    _max: {
-      price: true;
-    };
-    _min: {
-      price: true;
-    };
-  }>;
-}
-
-function PriceFilter({ res }: PriceFilterProps) {
+function PriceFilter() {
   const pathname = usePathname();
+
+  const [res, setRes] = useState<
+    Prisma.GetProductAggregateType<{
+      _max: {
+        price: true;
+      };
+      _min: {
+        price: true;
+      };
+    }>
+  >();
+
+  console.log({
+    res,
+  });
+
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await getMinMaxPrice(pathname.startsWith("/laptops"));
+
+      setRes(res);
+    };
+
+    fetch();
+  }, [pathname]);
+
+  useEffect(() => {
+    if (res) {
+      setMaxValue(
+        (pathname === "/laptops"
+          ? clientData?.price?.max
+          : pathname === "/dashboard/products" && productData?.price?.max) ||
+          res?._max.price ||
+          10000
+      );
+      setMinValue(
+        (pathname === "/laptops"
+          ? clientData?.price?.min
+          : pathname === "/dashboard/products" && productData?.price?.min) ||
+          res?._min.price ||
+          0
+      );
+    }
+  }, [res]);
 
   const { onSearch, productData, clientData } = useFilterModal();
 

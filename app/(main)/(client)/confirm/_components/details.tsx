@@ -1,42 +1,8 @@
 "use client";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-  battery,
-  brands,
-  items,
-  ram,
-  states,
-  storages,
-} from "@/product-options";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { wilayas } from "@/wilayas";
 import { fetchCart } from "@/hooks/use-fetch-cart";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
-import { redirect, useRouter } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
-import { AddClientDetails } from "@/actions/mutations/cart-actions/add-client-details";
-import { toast } from "sonner";
+import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -50,21 +16,17 @@ function Details() {
   const total = cart?.products.reduce((acc, product) => acc + product.price, 0);
 
   useEffect(() => {
-    if (cart) {
+    if (cart?.products) {
       if (!!!cart.products.length) {
         redirect("/");
       }
     }
   }, [cart]);
 
-  console.log({
-    cart,
-  });
-
   return (
     <div className="flex max-lg:flex-col flex-row gap-24 justify-center items-start w-full">
       <div className="space-y-5 p-5 bg-white rounded-sm shadow-md flex-grow">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap max-sm:items-start items-center max-sm:gap-5 justify-between">
           <h1 className="text-xl font-semibold">Personal details</h1>
           <Button
             className="bg-transparent border rounded-[2px] border-black text-black font-medium hover:bg-black 

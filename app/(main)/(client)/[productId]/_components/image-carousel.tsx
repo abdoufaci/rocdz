@@ -17,12 +17,12 @@ function ImageCarousel({ images }: ImageCarouselProps) {
   let imagesArray = images as Prisma.JsonArray;
 
   return (
-    <Carousel className="w-full max-w-lg">
+    <Carousel className="w-full max-[350px]:max-w-xs max-w-sm sm:max-w-lg">
       <CarouselContent>
         {imagesArray?.map((image, index) => (
           <CarouselItem key={index}>
             <Card>
-              <CardContent className="h-[464px] flex flex-col items-center justify-center p-6 w-full">
+              <CardContent className="flex flex-col items-center justify-center p-6 w-full">
                 <Image
                   alt="laptop"
                   src={

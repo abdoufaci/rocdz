@@ -57,7 +57,7 @@ function ProductActions({ product }: ProductActionsProps) {
     <div className="flex flex-wrap items-center gap-3 ">
       {pathname != "/laptops" && pathname != "/" && (
         <Button
-          className="rounded-none font-medium text-lg w-[336.65px] h-10 flex items-center gap-5"
+          className="rounded-none font-medium text-lg w-full max-w-[336.65px] h-10 flex items-center gap-5"
           size={"xl"}
           variant={"brand"}>
           <Truck className="h-4 w-4 text-black" />
@@ -70,7 +70,7 @@ function ProductActions({ product }: ProductActionsProps) {
           e.stopPropagation();
           mutate();
         }}
-        className="rounded-none font-medium text-lg w-[336.65px] h-10 flex items-center gap-5"
+        className="rounded-none font-medium text-lg w-full max-w-[336.65px] h-10 flex items-center gap-5"
         size={"xl"}>
         <ShoppingCart className="h-4 w-4 text-white" />
         add to cart

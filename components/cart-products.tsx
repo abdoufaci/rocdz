@@ -8,11 +8,12 @@ import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 import { Product, Cart as CartModel } from "@prisma/client";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { HandCoins } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { AddOrderFromCart } from "@/actions/mutations/order-actions/add-order-from-cart";
 import { toast } from "sonner";
+import { useModal } from "@/hooks/use-modal-store";
 
 interface CartProductsProps {
   isPending: boolean;
@@ -32,11 +33,15 @@ function CartProducts({
   isMutationPending,
 }: CartProductsProps) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const { onOpen } = useModal();
 
   const { mutate, isPending: isAddingOrder } = useMutation({
     mutationFn: () => AddOrderFromCart({ cart }),
     onSuccess() {
-      toast.success("Order added successfuly !");
+      localStorage.removeItem("cart_Id");
+      onOpen("thankyou");
     },
     onError() {
       toast.error("Something went wrong, try again .");
@@ -44,7 +49,7 @@ function CartProducts({
   });
 
   return (
-    <div className="max-w-[580px] p-4 bg-white rounded-sm shadow-md">
+    <div className="w-full max-w-[580px] p-4 bg-white rounded-sm shadow-md">
       <div className="w-full">
         {isPending ? (
           <Cart.Skelton />
@@ -95,7 +100,6 @@ function CartProducts({
                 isMutationPending ||
                 isAddingOrder
               }
-              type="submit"
               variant={"brand"}
               onClick={() => pathname === "/confirm" && mutate()}
               className={cn(

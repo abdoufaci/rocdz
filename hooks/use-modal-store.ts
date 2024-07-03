@@ -10,7 +10,9 @@ export type ModalType =
   | "productDetails"
   | "addOrder"
   | "orderDetails"
-  | "productsFilter";
+  | "productsFilter"
+  | "thankyou"
+  ;
 
 interface ModalData {
   product?: Product | null;

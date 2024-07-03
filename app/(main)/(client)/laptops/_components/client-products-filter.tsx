@@ -4,25 +4,14 @@ import { Prisma } from "@prisma/client";
 import PriceFilter from "@/app/(main)/(admin)/dashboard/products/_components/price-filter";
 
 interface ClientProductsFilterProps {
-  res?: Prisma.GetProductAggregateType<{
-    _max: {
-      price: true;
-    };
-    _min: {
-      price: true;
-    };
-  }>;
   searchParams?: string;
 }
 
-function ClientProductsFilter({
-  res,
-  searchParams,
-}: ClientProductsFilterProps) {
+function ClientProductsFilter({ searchParams }: ClientProductsFilterProps) {
   return (
     <div className="space-y-10 flex-grow">
       <ClientBrandsFilter searchParams={searchParams} />
-      <PriceFilter res={res} />
+      <PriceFilter />
     </div>
   );
 }

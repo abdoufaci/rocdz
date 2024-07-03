@@ -31,9 +31,14 @@ function OrderStatus({ orderStatus, orderId, products }: OrderStatusProps) {
   const { mutate } = useMutation({
     mutationFn: (status: status) =>
       UpdateOrderStatus(status, orderId, orderStatus, products),
-    onSuccess() {
-      toast.success("order status updated !");
-      refetch();
+    onSuccess(data) {
+      if (data?.error) {
+        toast.error(data.error);
+      }
+      if (data?.order) {
+        toast.success("order status updated !");
+        refetch();
+      }
     },
     onError() {
       toast.error("Something went wrong.");

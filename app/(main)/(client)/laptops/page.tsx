@@ -10,15 +10,14 @@ async function LaptopsPage({
 }: {
   searchParams: { brand: string };
 }) {
-  const res = await getMinMaxPrice();
   return (
     <div className="w-full bg-[#FAFAFA]">
       <div className="inline-block lg:hidden sticky top-0 left-0 z-50 p-5 w-full bg-white">
-        <ClientSearchFilter res={res} />
+        <ClientSearchFilter />
       </div>
       <div className="w-[90%] flex items-start gap-10 mx-auto relative mt-5 lg:mt-14">
-        <div className="sticky w-full max-w-[300px] top-10 left-0 hidden lg:inline-block ">
-          <ClientProductsFilter searchParams={searchParams.brand} res={res} />
+        <div className="sticky w-full max-w-[300px] top-24 left-0 hidden lg:inline-block ">
+          <ClientProductsFilter searchParams={searchParams.brand} />
         </div>
         <div className="w-full">
           <div className="hidden lg:block w-full max-w-[1700px] mx-auto">

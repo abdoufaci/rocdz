@@ -124,10 +124,13 @@ function OrdersTable({ products }: OrdersTableProps) {
           </TableBody>
         )}
       </Table>
-      {(orderData?.searchTerm != "" ||
+      {(((orderData?.searchTerm != "" ||
         orderData?.status != "" ||
         (!orderData?.timeline?.from && !orderData?.timeline?.to)) &&
-        orders?.pages[0].orders.length === 0 && <NoResult />}
+        orders?.pages[0].orders.length === 0) ||
+        orders?.pages[orders.pages.length - 1].orders.length === 0) && (
+        <NoResult />
+      )}
       <div className="flex items-center justify-end gap-5 w-full mt-3">
         <Button
           className={cn(

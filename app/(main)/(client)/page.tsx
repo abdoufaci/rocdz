@@ -20,8 +20,17 @@ export default function Home() {
         src={"/home-bar.svg"}
         height={500}
         width={500}
-        className="w-full mt-40"
+        className="w-full mt-40 max-md:hidden"
       />
+      <div className="w-full bg-[#202020]">
+        <Image
+          alt="bar"
+          src={"/small-bar.svg"}
+          height={500}
+          width={700}
+          className="w-[120%] mt-40 md:hidden"
+        />
+      </div>
       <div className="w-[90%] mx-auto mt-10">
         <Map />
       </div>
