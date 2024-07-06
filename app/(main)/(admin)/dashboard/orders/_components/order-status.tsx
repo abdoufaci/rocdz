@@ -88,6 +88,8 @@ function OrderStatus({ orderStatus, orderId, products }: OrderStatusProps) {
                     ? "bg-[#21D954]/15 focus-visible:bg-[#21D954]/20 text-[#239A3C] focus-visible:text-[#239A3C]"
                     : value.key === status.DELIVERING
                     ? "bg-[#1E78FF]/15 focus-visible:bg-[#1E78FF]/20 text-[#1E78FF] focus-visible:text-[#1E78FF]"
+                    : value.key === status.RETURN
+                    ? "bg-[#FCB707]/15 focus-visible:bg-[#FCB707]/20 text-warning focus-visible:text-warning"
                     : ""
                 )}>
                 {value.title}

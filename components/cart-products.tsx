@@ -58,17 +58,15 @@ function CartProducts({
             <h1 className="text-xl font-semibold text-[#1D1D1F]">
               Your Shopping Cart
             </h1>
-            <ScrollArea className="h-[180px]">
-              <div className="space-y-5 w-full">
-                {cart?.products?.map((product) => (
-                  <CartProductCard
-                    key={product.id}
-                    product={product}
-                    cartId={cart.id}
-                  />
-                ))}
-              </div>
-            </ScrollArea>
+            <div className="space-y-5 w-full">
+              {cart?.products?.map((product) => (
+                <CartProductCard
+                  key={product.id}
+                  product={product}
+                  cartId={cart.id}
+                />
+              ))}
+            </div>
             <Separator />
             {pathname === "/confirm" && cart?.price ? (
               <div className="space-y-1.5">

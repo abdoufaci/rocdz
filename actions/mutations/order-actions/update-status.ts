@@ -15,7 +15,10 @@ export const UpdateOrderStatus = async (
     return;
   }
 
-  if (currentStatus === "CANCELED") {
+  if (
+    (currentStatus === "CANCELED" && status != "RETURN") ||
+    (currentStatus === "RETURN" && status != "CANCELED")
+  ) {
     const result = await Promise.all(
       products.map(async (product) => {
         const neededProduct = await db.product.findUnique({
@@ -55,7 +58,10 @@ export const UpdateOrderStatus = async (
     );
   }
 
-  if (status === "CANCELED") {
+  if (
+    (status === "CANCELED" && currentStatus != "RETURN") ||
+    (status === "RETURN" && currentStatus != "CANCELED")
+  ) {
     const res = await db.$transaction(
       products.map((product) =>
         db.product.update({

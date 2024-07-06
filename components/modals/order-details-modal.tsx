@@ -20,7 +20,7 @@ export const OrderDetailsModal = () => {
 
   const isModalOpen = isOpen && type === "orderDetails";
 
-  const { onSearch, orderData } = useFilterModal();
+  const { onSearch, orderData, dashboardData } = useFilterModal();
 
   const { order } = data;
 
@@ -34,6 +34,9 @@ export const OrderDetailsModal = () => {
         searchTerm: orderData?.searchTerm,
         status: orderData?.status,
         timeline: orderData?.timeline,
+      },
+      {
+        timeline: dashboardData?.timeline,
       }
     );
     onClose();

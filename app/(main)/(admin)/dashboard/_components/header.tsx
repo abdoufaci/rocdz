@@ -11,7 +11,7 @@ async function Header() {
 
   return (
     <header className="w-[90%] mx-auto p-5">
-      <nav className="flex items-center justify-between">
+      <nav className="flex flex-wrap gap-5 md:gap-0 items-center justify-between">
         <div className="flex items-center gap-16">
           <Link href={"/"}>
             <Image alt="logo" src="/logo.svg" height={70} width={150} />

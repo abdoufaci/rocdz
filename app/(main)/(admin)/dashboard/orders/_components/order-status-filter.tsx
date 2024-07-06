@@ -68,6 +68,7 @@ function OrderStatusFilter() {
                     <SelectItem value={OrderStatus.CANCELED}>
                       Canceled
                     </SelectItem>
+                    <SelectItem value={OrderStatus.RETURN}>Return</SelectItem>
                     <SelectItem value={OrderStatus.DELIVERING}>
                       Delivering
                     </SelectItem>

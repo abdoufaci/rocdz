@@ -31,6 +31,7 @@ function DashboardDateFilter() {
   var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
   const pathname = usePathname();
+  const { onSearch, orderData } = useFilterModal();
 
   const form = useForm<z.infer<typeof DashboardDateFilterSchema>>({
     resolver: zodResolver(DashboardDateFilterSchema),
@@ -49,7 +50,11 @@ function DashboardDateFilter() {
     if (pathname === "/dashboard") {
       onSearch(
         {},
-        {},
+        {
+          searchTerm: orderData?.searchTerm,
+          status: orderData?.status,
+          timeline: orderData?.timeline,
+        },
         {
           timeline: {
             from: firstDay,
@@ -60,8 +65,6 @@ function DashboardDateFilter() {
     }
   }, [pathname]);
 
-  const { onSearch } = useFilterModal();
-
   const selectedTimeLine = form.watch("timeline");
 
   useEffect(() => {
@@ -71,7 +74,15 @@ function DashboardDateFilter() {
   }, [selectedTimeLine, form.handleSubmit]);
 
   async function onSubmit(data: z.infer<typeof DashboardDateFilterSchema>) {
-    onSearch({}, {}, { timeline: data.timeline });
+    onSearch(
+      {},
+      {
+        searchTerm: orderData?.searchTerm,
+        status: orderData?.status,
+        timeline: orderData?.timeline,
+      },
+      { timeline: data.timeline }
+    );
   }
 
   if (pathname === "/dashboard")

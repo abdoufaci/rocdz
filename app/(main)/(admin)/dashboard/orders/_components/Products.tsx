@@ -72,11 +72,7 @@ export const Products = ({
     fetchNextPage,
   } = useProductsQuery();
 
-  const { onSearch, productData, orderData } = useFilterModal();
-
-  console.log({
-    productData,
-  });
+  const { onSearch, productData, orderData, dashboardData } = useFilterModal();
 
   const [Buttonref, ButtonInView] = useInView();
 
@@ -93,6 +89,9 @@ export const Products = ({
         searchTerm: orderData?.searchTerm,
         status: orderData?.status,
         timeline: orderData?.timeline,
+      },
+      {
+        timeline: dashboardData?.timeline,
       }
     );
   }, [debouncedSearchTerm]);

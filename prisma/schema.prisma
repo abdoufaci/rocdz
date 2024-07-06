@@ -64,6 +64,7 @@ enum OrderStatus {
   DELIVERING
   NOTCONFIRMED
   CONFIRMED
+  RETURN
 }
 
 model Order {

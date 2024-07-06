@@ -40,6 +40,14 @@ export const statuses = {
     key: OrderStatus.CONFIRMED,
     stepTitle: "Order Confirmed By client",
   },
+  RETURN: {
+    className:
+      "bg-[#FCB707]/15 focus-visible:bg-[#FCB707]/20 text-warning focus-visible:text-warning",
+    title: "Return",
+    color: "text-warning",
+    key: OrderStatus.RETURN,
+    stepTitle: "Order Return From client",
+  },
 };
 
 /*

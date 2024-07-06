@@ -21,11 +21,7 @@ import NoResult from "@/components/no-result";
 import { useModal } from "@/hooks/use-modal-store";
 import { Product } from "@prisma/client";
 
-interface OrdersTableProps {
-  products?: Product[];
-}
-
-function OrdersTable({ products }: OrdersTableProps) {
+function OrdersTable() {
   const {
     data: orders,
     fetchNextPage,
