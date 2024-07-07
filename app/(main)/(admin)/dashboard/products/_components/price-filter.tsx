@@ -22,10 +22,6 @@ function PriceFilter() {
     }>
   >();
 
-  console.log({
-    res,
-  });
-
   useEffect(() => {
     const fetch = async () => {
       const res = await getMinMaxPrice(pathname.startsWith("/laptops"));
@@ -55,7 +51,7 @@ function PriceFilter() {
     }
   }, [res]);
 
-  const { onSearch, productData, clientData } = useFilterModal();
+  const { onSearch, productData, clientData, dashboardData } = useFilterModal();
 
   const [MinValue, setMinValue] = useState<number>(
     (pathname === "/laptops"
@@ -92,14 +88,16 @@ function PriceFilter() {
                     },
                   },
                   {},
-                  {},
+                  {
+                    timeline: dashboardData?.timeline,
+                  },
                   {}
                 )
               : pathname === "/laptops" &&
                 onSearch(
                   {},
                   {},
-                  {},
+                  { timeline: dashboardData?.timeline },
                   {
                     brands: clientData.brands,
                     searchTerm: clientData.searchTerm,

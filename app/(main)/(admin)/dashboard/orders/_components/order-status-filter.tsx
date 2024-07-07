@@ -29,7 +29,7 @@ const brandSchema = z.object({
 });
 
 function OrderStatusFilter() {
-  const { onSearch, orderData } = useFilterModal();
+  const { onSearch, orderData, dashboardData } = useFilterModal();
 
   const form = useForm<z.infer<typeof brandSchema>>({
     resolver: zodResolver(brandSchema),
@@ -44,7 +44,11 @@ function OrderStatusFilter() {
   }, [selectedStatus, form.handleSubmit]);
 
   async function onSubmit({ status }: z.infer<typeof brandSchema>) {
-    onSearch({}, { timeline: orderData?.timeline || {}, status });
+    onSearch(
+      {},
+      { timeline: orderData?.timeline || {}, status },
+      { timeline: dashboardData?.timeline }
+    );
   }
 
   return (

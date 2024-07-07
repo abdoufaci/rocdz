@@ -39,10 +39,6 @@ function DashboardStates() {
 
   const topWilayas = TopWilayaData({ orders, topWilayas: data?.groupedOrders });
 
-  console.log({
-    topWilayas,
-  });
-
   return (
     <>
       {!isPending && !LastMonthPending ? (

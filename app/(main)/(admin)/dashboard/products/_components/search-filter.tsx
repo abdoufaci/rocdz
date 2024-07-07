@@ -21,18 +21,24 @@ function SearchFilter() {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
-  const { onSearch, productData } = useFilterModal();
+  const { onSearch, productData, dashboardData } = useFilterModal();
 
   const { data: products } = useProductsQuery();
 
   useEffect(() => {
     const fetchProducts = async () => {
-      onSearch({
-        searchTerm,
-        brand: productData?.brand || "",
-        status: productData?.status || "",
-        price: productData?.price,
-      });
+      onSearch(
+        {
+          searchTerm,
+          brand: productData?.brand || "",
+          status: productData?.status || "",
+          price: productData?.price,
+        },
+        {},
+        {
+          timeline: dashboardData?.timeline,
+        }
+      );
     };
     fetchProducts();
   }, [debouncedSearchTerm]);

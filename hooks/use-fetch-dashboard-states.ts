@@ -10,7 +10,12 @@ export const fetchDashboardStates = () => {
     queryFn: () => getDashboardStates({ timeline: dashboardData.timeline }),
     queryKey: [
       "dashboardStates",
-      dashboardData ?? { timeline: { from: new Date(), to: new Date() } },
+      dashboardData ?? {
+        timeline: {
+          from: new Date(),
+          to: new Date(),
+        },
+      },
     ],
   });
 

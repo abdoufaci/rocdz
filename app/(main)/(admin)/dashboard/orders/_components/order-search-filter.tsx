@@ -21,7 +21,7 @@ function OrderSearchFilter() {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
-  const { onSearch, orderData } = useFilterModal();
+  const { onSearch, orderData, dashboardData } = useFilterModal();
 
   const { data: orders } = useOrdersQuery();
 
@@ -33,7 +33,8 @@ function OrderSearchFilter() {
           searchTerm,
           status: orderData?.status || "",
           timeline: orderData?.timeline || {},
-        }
+        },
+        { timeline: dashboardData?.timeline }
       );
     };
     fetchProducts();

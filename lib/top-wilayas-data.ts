@@ -10,12 +10,22 @@ interface chartDataProps {
 }
 
 export const TopWilayaData = ({ orders, topWilayas }: chartDataProps) => {
+  var date = new Date();
+  var thisMonthfirstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+  var thisMonthlastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+
+  const convertedOrders = orders?.filter(
+    (order) =>
+      order.createdAt >= thisMonthfirstDay &&
+      order.createdAt <= thisMonthlastDay
+  );
+
   const data = topWilayas
     ?.map((topWilaya) => ({
       wilaya: topWilaya.wilaya,
       sales:
-        orders?.filter((order) => order.wilaya === topWilaya.wilaya).length ||
-        0,
+        convertedOrders?.filter((order) => order.wilaya === topWilaya.wilaya)
+          .length || 0,
     }))
     .sort((data1, data2) => (data1?.sales < data2?.sales ? 1 : 0))
     .slice(0, 10);

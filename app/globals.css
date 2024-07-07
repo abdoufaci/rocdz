@@ -84,3 +84,10 @@
       @apply bg-background text-foreground;
     }
   }
+
+  .dashboardfootershadow {
+    box-shadow: 0px 4.29px 8.14px 0px #FCB70759;
+
+box-shadow: 0px -1.07px 11.89px 0px #FCB70770;
+
+  }

@@ -27,7 +27,7 @@ const statusSchema = z.object({
 });
 
 function StatusFilter() {
-  const { onSearch, productData } = useFilterModal();
+  const { onSearch, productData, dashboardData } = useFilterModal();
 
   const form = useForm<z.infer<typeof statusSchema>>({
     resolver: zodResolver(statusSchema),
@@ -42,12 +42,18 @@ function StatusFilter() {
   }, [selectedStatus, form.handleSubmit]);
 
   async function onSubmit({ status }: z.infer<typeof statusSchema>) {
-    onSearch({
-      status,
-      searchTerm: productData?.searchTerm || "",
-      brand: productData?.brand || "",
-      price: productData?.price,
-    });
+    onSearch(
+      {
+        status,
+        searchTerm: productData?.searchTerm || "",
+        brand: productData?.brand || "",
+        price: productData?.price,
+      },
+      {},
+      {
+        timeline: dashboardData?.timeline,
+      }
+    );
   }
 
   return (

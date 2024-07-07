@@ -9,7 +9,15 @@ export const fetchLastMonthDashboardStates = () => {
 
   const { data, isPending, refetch } = useQuery({
     queryFn: () => getBeforeMonthStates({ timeline: dashboardData.timeline }),
-    queryKey: ["dashboardBeforeMonthStates", dashboardData],
+    queryKey: [
+      "dashboardBeforeMonthStates",
+      dashboardData ?? {
+        timeline: {
+          from: new Date(),
+          to: new Date(),
+        },
+      },
+    ],
   });
 
   return {

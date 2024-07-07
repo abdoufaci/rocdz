@@ -17,6 +17,7 @@ export const UpdateCart = async ({
 }: AddToCartProps) => {
   const Productexist = await db.cart.findFirst({
     where: {
+      id: cartId,
       products: {
         some: {
           id: product?.id,

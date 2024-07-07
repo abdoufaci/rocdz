@@ -38,6 +38,8 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function TopWilayas({ chartData }: TopWilayasProps) {
+  const containerHeight = `${chartData ? chartData.length * (20 + 10) : 200}px`;
+
   return (
     <Card className="bg-white rounded-2xl space-y-0 w-full max-w-[450px] h-fit max-h-[500px]">
       <CardHeader>
@@ -52,8 +54,13 @@ export function TopWilayas({ chartData }: TopWilayasProps) {
         </div>
       </CardHeader>
       <CardContent>
-        <ChartContainer className="w-[90%] h-20 " config={chartConfig}>
-          <ResponsiveContainer width="100%" height={20}>
+        <ChartContainer
+          className="w-[90%]"
+          style={{
+            height: containerHeight,
+          }}
+          config={chartConfig}>
+          <ResponsiveContainer width="100%" height="100%">
             <BarChart
               accessibilityLayer
               data={chartData}

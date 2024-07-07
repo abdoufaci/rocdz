@@ -29,7 +29,7 @@ function DateFilter() {
     resolver: zodResolver(DateFilterSchema),
   });
 
-  const { onSearch, orderData } = useFilterModal();
+  const { onSearch, orderData, dashboardData } = useFilterModal();
 
   const selectedTimeLine = form.watch("timeline");
 
@@ -40,7 +40,11 @@ function DateFilter() {
   }, [selectedTimeLine, form.handleSubmit]);
 
   async function onSubmit(data: z.infer<typeof DateFilterSchema>) {
-    onSearch({}, { timeline: data.timeline, status: orderData?.status || "" });
+    onSearch(
+      {},
+      { timeline: data.timeline, status: orderData?.status || "" },
+      { timeline: dashboardData?.timeline }
+    );
   }
 
   return (
