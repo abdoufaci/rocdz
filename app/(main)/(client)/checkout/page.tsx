@@ -1,5 +1,6 @@
 import Back from "./_components/back";
 import dynamic from "next/dynamic";
+import { Analytics } from "@vercel/analytics/react";
 
 const CheckoutForm = dynamic(() => import("@/components/forms/chekout-form"), {
   ssr: false,
@@ -12,6 +13,7 @@ function CheckoutPage() {
         <Back />
         <CheckoutForm />
       </div>
+      <Analytics />
     </div>
   );
 }

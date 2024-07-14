@@ -3,7 +3,7 @@ import Map from "../_components/Map";
 import ProductsFeed from "../_components/products-feed";
 import ClientProductsFilter from "./_components/client-products-filter";
 import ClientSearchFilter from "./_components/search-filter";
-import { getMinMaxPrice } from "@/actions/queries/get-min-max-price";
+import { Analytics } from "@vercel/analytics/react";
 
 async function LaptopsPage({
   searchParams,
@@ -12,7 +12,7 @@ async function LaptopsPage({
 }) {
   return (
     <div className="w-full bg-[#FAFAFA]">
-      <div className="inline-block lg:hidden sticky top-0 left-0 z-50 p-5 w-full bg-white">
+      <div className="inline-block lg:hidden sticky top-20 left-0 z-50 p-5 w-full bg-white">
         <ClientSearchFilter />
       </div>
       <div className="w-[90%] flex items-start gap-10 mx-auto relative mt-5 lg:mt-14">
@@ -26,6 +26,7 @@ async function LaptopsPage({
           <ProductsFeed />
         </div>
       </div>
+      <Analytics />
       <Map />
       <Footer />
     </div>

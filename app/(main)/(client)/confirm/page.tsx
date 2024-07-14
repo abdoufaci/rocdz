@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import Back from "../checkout/_components/back";
+import { Analytics } from "@vercel/analytics/react";
 
 const Details = dynamic(() => import("./_components/details"), {
   ssr: false,
@@ -12,6 +13,7 @@ function CheckoutPage() {
         <Back />
         <Details />
       </div>
+      <Analytics />
     </div>
   );
 }

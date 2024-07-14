@@ -1,5 +1,17 @@
 import AdminFooter from "@/components/admin-footer";
 import Header from "./_components/header";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ROCDZ",
+  description: "Laptops for every Budget",
+  icons: [
+    {
+      url: "/icon.svg",
+      href: "/icon.svg",
+    },
+  ],
+};
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (

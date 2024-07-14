@@ -27,7 +27,7 @@ export const TopWilayaData = ({ orders, topWilayas }: chartDataProps) => {
         convertedOrders?.filter((order) => order.wilaya === topWilaya.wilaya)
           .length || 0,
     }))
-    .sort((data1, data2) => (data1?.sales < data2?.sales ? 1 : 0))
+    .sort((data1, data2) => data2.sales - data1.sales)
     .slice(0, 10);
 
   return data;

@@ -1,13 +1,12 @@
-import { Button } from "@/components/ui/button";
-import ClientHeader from "./_components/client-header";
 import ClientBanner from "./_components/client-banner";
 import Brands from "@/components/brands";
 import ProductArival from "./_components/product-arival";
 import Image from "next/image";
 import Map from "./_components/Map";
 import Footer from "@/components/footer/footer";
+import { Analytics } from "@vercel/analytics/react";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       <ClientBanner />
@@ -34,6 +33,7 @@ export default function Home() {
       <div className="w-[90%] mx-auto mt-10">
         <Map />
       </div>
+      <Analytics />
       <Footer />
     </main>
   );

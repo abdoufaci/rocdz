@@ -7,7 +7,7 @@ import { fetchCart } from "@/hooks/use-fetch-cart";
 import { Product } from "@prisma/client";
 import { useMutation } from "@tanstack/react-query";
 import { ShoppingCart, Truck } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 interface ProductActionsProps {
@@ -16,6 +16,8 @@ interface ProductActionsProps {
 
 function ProductActions({ product }: ProductActionsProps) {
   const pathname = usePathname();
+
+  const router = useRouter();
 
   const cartId = localStorage.getItem("cart_Id");
   const { refetch } = fetchCart();
@@ -44,6 +46,35 @@ function ProductActions({ product }: ProductActionsProps) {
     },
   });
 
+  const { mutate: mutateChekout, isPending: isPendingCheckout } = useMutation({
+    mutationFn: () =>
+      cartId ? UpdateCart({ product, cartId, pathname }) : add(),
+    onMutate() {
+      toast.loading("redirecting to checkout...");
+    },
+    onSuccess(data) {
+      if (data.cart) {
+        refetch();
+        toast.success("product added successfully !");
+        router.push("/checkout");
+      }
+      if (data.error === "product already in the cart") {
+        refetch();
+        router.push("/checkout");
+      }
+      if (data.error != "product already in the cart" && data.error) {
+        toast.error(data.error);
+      }
+    },
+    onError(error) {
+      console.log({ error: error.message });
+      toast.error("Something went wrong");
+    },
+    onSettled() {
+      toast.dismiss();
+    },
+  });
+
   const add = async () => {
     const data = await AddToCart({ product, pathname });
 
@@ -57,6 +88,11 @@ function ProductActions({ product }: ProductActionsProps) {
     <div className="flex flex-wrap items-center gap-3 ">
       {pathname != "/laptops" && pathname != "/" && (
         <Button
+          disabled={isPendingCheckout}
+          onClick={(e) => {
+            e.stopPropagation();
+            mutateChekout();
+          }}
           className="rounded-none font-medium text-lg w-full max-w-[336.65px] h-10 flex items-center gap-5"
           size={"xl"}
           variant={"brand"}>

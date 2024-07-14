@@ -55,7 +55,7 @@ export const CheckoutSchema = z.object({
 function CheckoutForm() {
   const router = useRouter();
 
-  const { data: cart, isPending } = fetchCart(true);
+  const { data: cart, isPending } = fetchCart();
 
   const total = cart?.products.reduce((acc, product) => acc + product.price, 0);
 
@@ -76,7 +76,7 @@ function CheckoutForm() {
 
   useEffect(() => {
     if (cart) {
-      if (!!!cart.products.length) {
+      if (!!!cart.products.length && !!cart.products) {
         redirect("/");
       }
     }
@@ -121,7 +121,7 @@ function CheckoutForm() {
       name: data.firstName + " " + data.lastName,
       details: data.details,
       //@ts-ignore
-      price: total + selectedWilaya?.shippingCost,
+      price: total,
     };
 
     mutate(convertedData);

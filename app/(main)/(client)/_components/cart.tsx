@@ -7,9 +7,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { fetchCart } from "@/hooks/use-fetch-cart";
-import { Cart as CartModel, Product } from "@prisma/client";
 import { ShoppingBag } from "lucide-react";
-import { useEffect, useState } from "react";
 import CartProductCard from "./cart-product-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";

@@ -1,6 +1,7 @@
 import DashboardStates from "./_components/dashboard-states";
 import OrdersBar from "./orders/_components/orders-bar";
 import OrdersTable from "./orders/_components/orders-table";
+import { Analytics } from "@vercel/analytics/react";
 
 function DashboardPage() {
   return (
@@ -10,6 +11,7 @@ function DashboardPage() {
         <OrdersBar />
         <OrdersTable />
       </div>
+      <Analytics />
     </div>
   );
 }

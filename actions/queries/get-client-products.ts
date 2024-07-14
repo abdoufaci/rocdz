@@ -27,13 +27,13 @@ export const getClientProducts = async ({
         OR: [
           {
             name: {
-              contains: filterData.searchTerm,
+              contains: filterData.searchTerm ? filterData.searchTerm : "",
               mode: "insensitive",
             },
           },
           {
             brand: {
-              contains: filterData.searchTerm,
+              contains: filterData.searchTerm ? filterData.searchTerm : "",
               mode: "insensitive",
             },
           },
@@ -65,13 +65,13 @@ export const getClientProducts = async ({
         OR: [
           {
             name: {
-              contains: filterData.searchTerm,
+              contains: filterData.searchTerm ? filterData.searchTerm : "",
               mode: "insensitive",
             },
           },
           {
             brand: {
-              contains: filterData.searchTerm,
+              contains: filterData.searchTerm ? filterData.searchTerm : "",
               mode: "insensitive",
             },
           },

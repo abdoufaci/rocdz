@@ -20,12 +20,23 @@ export const AddClientDetails = async (
     delete data.details;
   }
 
+  const shippinCost = await db.wilaya.findUnique({
+    where: {
+      name: data.wilaya,
+    },
+  });
+
+  const convertedData = {
+    ...data,
+    price: data.price + (shippinCost?.price || 0),
+  };
+
   const cart = await db.cart.update({
     where: {
       id: cart_Id || "",
     },
     data: {
-      ...data,
+      ...convertedData,
     },
   });
 

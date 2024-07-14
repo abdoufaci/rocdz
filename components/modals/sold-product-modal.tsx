@@ -13,6 +13,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { SoldProduct } from "@/actions/mutations/product-actions/sold-product";
 import { Prisma } from "@prisma/client";
+import { useProductsQuery } from "@/hooks/use-query-products";
 
 export const SoldProductModal = () => {
   const { isOpen, onClose, type, data } = useModal();
@@ -20,11 +21,14 @@ export const SoldProductModal = () => {
   const { product } = data;
   const isModalOpen = isOpen && !!product && type === "soldProduct";
 
+  const { refetch } = useProductsQuery();
+
   let productImages = product?.images as Prisma.JsonArray;
 
   const { mutate: removeProductMutation, isPending } = useMutation({
     mutationFn: () => SoldProduct({ product }),
     onSuccess(data) {
+      refetch();
       toast.success(`${data.name} updated successfully`);
     },
     onError() {

@@ -11,7 +11,7 @@ const CartProducts = dynamic(() => import("@/components/cart-products"), {
 });
 
 function Details() {
-  const { data: cart, isPending } = fetchCart(true);
+  const { data: cart, isPending } = fetchCart();
 
   const total = cart?.products.reduce((acc, product) => acc + product.price, 0);
 

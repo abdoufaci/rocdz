@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 export const fetchAllProducts = () => {
   const { data, isPending, refetch } = useQuery({
     queryFn: () => getAllProducts(),
-    queryKey: ["products"],
+    queryKey: ["clientproducts"],
   });
 
   return {

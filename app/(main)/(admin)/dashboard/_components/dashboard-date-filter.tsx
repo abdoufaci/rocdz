@@ -31,7 +31,7 @@ function DashboardDateFilter() {
   var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
   const pathname = usePathname();
-  const { onSearch, orderData } = useFilterModal();
+  const { onSearch, orderData, clientData } = useFilterModal();
 
   const form = useForm<z.infer<typeof DashboardDateFilterSchema>>({
     resolver: zodResolver(DashboardDateFilterSchema),
@@ -60,6 +60,11 @@ function DashboardDateFilter() {
             from: firstDay,
             to: lastDay,
           },
+        },
+        {
+          brands: clientData?.brands,
+          price: clientData?.price,
+          searchTerm: clientData?.searchTerm,
         }
       );
     }
